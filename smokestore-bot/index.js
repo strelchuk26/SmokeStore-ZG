@@ -18,6 +18,8 @@ const app = express();
 const bot = new Bot(process.env.BOT_TOKEN);
 const db = admin.firestore();
 
+const WEBAPP_URL = "https://unmoral-blaise-unillustrious.ngrok-free.dev/";
+
 async function saveUser(ctx) {
     try {
         const chatId = ctx.chat?.id?.toString();
@@ -42,7 +44,18 @@ bot.command("start", async (ctx) => {
     try {
         await saveUser(ctx);
 
-        ctx.reply(`Welcome to SmokeStore Bot! ${ctx?.from?.first_name}`);
+        await ctx.reply("Ласкаво просимо до SmokeStore! 👋", {
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        {
+                            text: "Відкрити магазин 🚬",
+                            web_app: { url: WEBAPP_URL },
+                        },
+                    ],
+                ],
+            },
+        });
     } catch (error) {
         console.error("Error in /start command:", error);
     }
