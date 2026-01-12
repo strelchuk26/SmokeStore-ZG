@@ -4,13 +4,14 @@ import { BackButton } from "@/components/BackButton";
 import { useParams } from "next/navigation";
 
 export default function ProductPage() {
-  const { id } = useParams();
+    const { id } = useParams();
 
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Product page</h1>
-      <p className="text-sm text-muted-foreground">ID: {id}</p>
-      <BackButton />
-    </div>
-  );
+    return (
+        <div className="p-4">
+            <img src="/vozol.png" alt={`${id}`} /> {/* Placeholder image */}
+            <h1 className="text-2xl font-bold">Product page</h1>
+            <p className="text-sm text-muted-foreground">ID: {id}</p>
+            <BackButton />
+        </div>
+    );
 }

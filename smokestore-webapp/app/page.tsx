@@ -1,52 +1,14 @@
 "use client";
 
 import { ProductCard } from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
-import { TestTubeDiagonal } from "lucide-react";
-
-const products = [
-    {
-        id: "vozol-peach-ice1",
-        name: "Vozol Peach Ice",
-        subtitle: "50mg • 30ml",
-        price: 60,
-        image: "/vozol.png",
-    },
-    {
-        id: "vozol-peach-ice2",
-        name: "Vozol Peach Ice",
-        subtitle: "50mg • 30ml",
-        price: 60,
-        image: "/vozol.png",
-    },
-    {
-        id: "vozol-peach-ice3",
-        name: "Vozol Peach Ice",
-        subtitle: "50mg • 30ml",
-        
-        price: 60,
-        image: "/vozol.png",
-    },
-    {
-        id: "vozol-peach-ice4",
-        name: "Vozol Peach Ice",
-        subtitle: "50mg • 30ml",
-        price: 60,
-        image: "/vozol.png",
-    },
-    {
-        id: "vozol-peach-ice5",
-        name: "Vozol Peach Ice",
-        subtitle: "50mg • 30ml",
-        price: 60,
-        image: "/vozol.png",
-    },
-];
+import { products } from "./products";
+// import { Button } from "@/components/ui/button";
+// import { TestTubeDiagonal } from "lucide-react";
 
 export default function Home() {
     return (
         <div className="wrapper flex flex-col mx-auto max-w-[430px]">
-            <div className="m-4">
+            {/* <div className="m-4">
                 <h2 className="font-bold">Categories</h2>
                 <div className="flex mt-2 gap-4 scroll-smooth overflow-auto">
                     <Button variant="outline" className="h-16 w-25 flex-col gap-0 items-center justify-center">
@@ -66,7 +28,7 @@ export default function Home() {
                         Other
                     </Button>
                 </div>
-            </div>
+            </div> */}
             <p className="ml-4 font-bold">Popular choice</p>
             <div className="grid grid-cols-2 gap-4 p-4 justify-items-center mb-16">
                 {products.map((product) => (

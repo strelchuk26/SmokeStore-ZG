@@ -1,0 +1,66 @@
+export const products = [
+    {
+        id: "vozol-peach-ice1",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+    {
+        id: "vozol-peach-ice2",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+    {
+        id: "vozol-peach-ice3",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        
+        price: 60,
+        image: "/vozol.png",
+    },
+    {
+        id: "vozol-peach-ice4",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+    {
+        id: "vozol-peach-ice5",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+     {
+        id: "vozol-peach-ice6",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+    {
+        id: "vozol-peach-ice7",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+     {
+        id: "vozol-peach-ice8",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+    {
+        id: "vozol-peach-ice9",
+        name: "Vozol Peach Ice",
+        subtitle: "50mg • 30ml",
+        price: 60,
+        image: "/vozol.png",
+    },
+];
