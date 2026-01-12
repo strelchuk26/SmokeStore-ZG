@@ -1,80 +1,49 @@
-import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+"use client";
+
+import { ProductCard } from "@/components/ProductCard";
+import { products } from "./products";
+// import { Button } from "@/components/ui/button";
+// import { TestTubeDiagonal } from "lucide-react";
 
 export default function Home() {
     return (
-        <div className="wrapper flex flex-col">
-            <h1 className="p-4 text-4xl font-black">Smoke Store</h1>
-            <div className="flex scroll-smooth">
-                <Button variant="outline" className="m-2">
-                    Shop Now
-                </Button>
-                <Button variant="outline" className="m-2">
-                    Shop Now
-                </Button>
-                <Button variant="outline" className="m-2">
-                    Shop Now
-                </Button>
-                <Button variant="outline" className="m-2">
-                    Shop Now
-                </Button>
-            </div>
-            <div className="ml-4 font-bold">Popular choice</div>
-            <div className="flex flex-wrap gap-4 p-4">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Card Title</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
-                        <CardAction>Card Action</CardAction>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Card Content</p>
-                    </CardContent>
-                    <CardFooter>
-                        <p>Card Footer</p>
-                    </CardFooter>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Card Title</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
-                        <CardAction>Card Action</CardAction>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Card Content</p>
-                    </CardContent>
-                    <CardFooter>
-                        <p>Card Footer</p>
-                    </CardFooter>
-                </Card>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Card Title</CardTitle>
-                        <CardDescription>Card Description</CardDescription>
-                        <CardAction>Card Action</CardAction>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Card Content</p>
-                    </CardContent>
-                    <CardFooter>
-                        <p>Card Footer</p>
-                    </CardFooter>
-                </Card>
-            </div>
-            <div
-                className="p-1 fixed w-full bottom-0 flex justify-center bg-white/10 backdrop-blur-md
-                    supports-[backdrop-filter]:backdrop-blur-md border-t border-gray-200
-                    border-opacity-20 z-50"
-            >
-                <Button variant={"default"}>Home</Button>
+        <div className="wrapper flex flex-col mx-auto max-w-[430px]">
+            {/* <div className="m-4">
+                <h2 className="font-bold">Categories</h2>
+                <div className="flex mt-2 gap-4 scroll-smooth overflow-auto">
+                    <Button variant="outline" className="h-16 w-25 flex-col gap-0 items-center justify-center">
+                        <TestTubeDiagonal />
+                        Liquids
+                    </Button>
+                    <Button variant="outline" className="h-16 w-25 flex-col gap-0 items-center justify-center">
+                        <TestTubeDiagonal />
+                        Disposables
+                    </Button>
+                    <Button variant="outline" className="h-16 w-25 flex-col gap-0 items-center justify-center">
+                        <TestTubeDiagonal />
+                        Pods
+                    </Button>
+                    <Button variant="outline" className="h-16 w-25 flex-col gap-0 items-center justify-center">
+                        <TestTubeDiagonal />
+                        Other
+                    </Button>
+                </div>
+            </div> */}
+            <p className="ml-4 font-bold">Popular choice</p>
+            <div className="grid grid-cols-2 gap-4 p-4 justify-items-center mb-16">
+                {products.map((product) => (
+                    <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        name={product.name}
+                        price={product.price}
+                        subtitle={product.subtitle}
+                        image={product.image}
+                        onAddToCart={() => {
+                            alert(`Add to cart: ${product.id}`);
+                        }}
+                    />
+                ))}
             </div>
         </div>
     );
