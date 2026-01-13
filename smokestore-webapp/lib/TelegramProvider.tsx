@@ -41,11 +41,3 @@ export const TelegramProvider = ({ children }: { children: React.ReactNode }) =>
 };
 
 export const useTelegram = () => useContext(TelegramContext);
-
-export const HapticFeedback = (type: "light" | "medium" | "heavy" | "rigid" | "soft") => {
-    const { webApp } = useTelegram();
-
-    if (webApp?.HapticFeedback) {
-        webApp.HapticFeedback.impactOccurred(type);
-    }
-};
