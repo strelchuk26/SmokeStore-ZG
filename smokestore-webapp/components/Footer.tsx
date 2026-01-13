@@ -1,10 +1,12 @@
 "use client";
 
-import { HapticFeedback } from "@/lib/TelegramProvider";
+import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { House, ShoppingCart, ClipboardList, UserRound } from "lucide-react";
 import Link from "next/link";
 
 export const Footer = () => {
+    const { HapticImpact } = useHapticFeedback();
+
     return (
         <>
             <div
@@ -12,7 +14,7 @@ export const Footer = () => {
                 backdrop-blur-md border-opacity-20 z-50"
             >
                 <Link href="/" onClick={() => {
-                    HapticFeedback("soft");
+                    HapticImpact("soft");
                 }}>
                     <div className="flex flex-col items-center">
                         <House />
@@ -20,7 +22,7 @@ export const Footer = () => {
                     </div>
                 </Link>
                 <Link href="/cart" onClick={() => {
-                    HapticFeedback("soft");
+                    HapticImpact("soft");
                 }}>
                     <div className="flex flex-col items-center">
                         <ShoppingCart />

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
-import { HapticFeedback } from "@/lib/TelegramProvider";
+import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 interface CartItemProps {
     id: string;
@@ -11,23 +11,24 @@ interface CartItemProps {
     price: number;
     subtitle: string;
     image: string;
-    count: number;
+    quantity: number;
 }
 
-export const CartItem = ({ id, name, price, subtitle, image, count = 1 }: CartItemProps) => {
-    const [countState, setCountState] = useState(count);
+export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: CartItemProps) => {
+    const [quantityState, setQuantityState] = useState(quantity);
+    const { HapticImpact } = useHapticFeedback();
 
     const handlePlusClick = () => {
-        setCountState(countState + 1);
-        HapticFeedback("soft");
+        setQuantityState(quantityState + 1);
+        HapticImpact("soft");
     };
 
     const handleMinusClick = () => {
-        if (countState > 1) {
-            setCountState(countState - 1);
-            HapticFeedback("light");
+        if (quantityState > 1) {
+            setQuantityState(quantityState - 1);
+            HapticImpact("light");
         } else {
-            HapticFeedback("rigid");
+            HapticImpact("rigid");
             alert("Minimum quantity is 1");
         }
     };
@@ -44,16 +45,16 @@ export const CartItem = ({ id, name, price, subtitle, image, count = 1 }: CartIt
             </div>
             <div className="flex flex-col justify-between items-center">
                 <button
-                    onClick={handlePlusClick}
+                    onClick={() => handlePlusClick()}
                     className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white active:scale-95"
                 >
                     <Plus size={16} />
                 </button>
                 <div className="flex justify-center">
-                    <span>{countState}</span>
+                    <span>{quantityState}</span>
                 </div>
                 <button
-                    onClick={handleMinusClick}
+                    onClick={() => handleMinusClick()}
                     className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white active:scale-95"
                 >
                     <Minus size={16} />
