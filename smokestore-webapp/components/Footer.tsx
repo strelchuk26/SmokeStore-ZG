@@ -1,3 +1,6 @@
+"use client";
+
+import { HapticFeedback } from "@/lib/TelegramProvider";
 import { House, ShoppingCart, ClipboardList, UserRound } from "lucide-react";
 import Link from "next/link";
 
@@ -8,13 +11,17 @@ export const Footer = () => {
                 className="flex p-4 w-full fixed bottom-0 justify-around items-center bg-white/10 border-gray-200
                 backdrop-blur-md border-opacity-20 z-50"
             >
-                <Link href="/">
+                <Link href="/" onClick={() => {
+                    HapticFeedback("soft");
+                }}>
                     <div className="flex flex-col items-center">
                         <House />
                         <p className="text-[12px]">Home</p>
                     </div>
                 </Link>
-                <Link href="/cart">
+                <Link href="/cart" onClick={() => {
+                    HapticFeedback("soft");
+                }}>
                     <div className="flex flex-col items-center">
                         <ShoppingCart />
                         <p className="text-[12px]">My Cart</p>

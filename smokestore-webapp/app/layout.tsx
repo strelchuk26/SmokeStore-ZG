@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import Script from "next/script";
+import { TelegramProvider } from "@/lib/TelegramProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -25,11 +27,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <Header />
-                <main className="flex-1">{children}</main>
-                <Footer />
+        <html lang="en" suppressHydrationWarning>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+                <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+                <div>
+                    <TelegramProvider>
+                        <Header />
+                        <main className="flex-1">{children}</main>
+                        <Footer />
+                    </TelegramProvider>
+                </div>
             </body>
         </html>
     );
