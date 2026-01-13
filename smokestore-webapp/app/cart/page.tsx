@@ -21,6 +21,7 @@ export default function Home() {
                     price={product.price}
                     subtitle={product.subtitle}
                     image={product.image}
+                    count={1}
                 />
             ))}
         </div>
