@@ -8,22 +8,21 @@ export const products = [
     },
     {
         id: "vozol-peach-ice2",
-        name: "Vozol Peach Ice",
+        name: "Vozol Grape Ice",
         subtitle: "50mg • 30ml",
         price: 60,
         image: "/vozol.png",
     },
     {
         id: "vozol-peach-ice3",
-        name: "Vozol Peach Ice",
+        name: "Vozol Watermelon Ice",
         subtitle: "50mg • 30ml",
-        
         price: 60,
         image: "/vozol.png",
     },
     {
         id: "vozol-peach-ice4",
-        name: "Vozol Peach Ice",
+        name: "Vozol Apple Ice",
         subtitle: "50mg • 30ml",
         price: 60,
         image: "/vozol.png",

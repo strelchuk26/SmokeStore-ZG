@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { Minus, Plus } from "lucide-react";
-import { useState } from "react";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
+import { useCart } from "@/lib/CartProvider";
+import { useState } from "react";
+import { useTelegram } from "@/lib/TelegramProvider";
 
 interface CartItemProps {
     id: string;
@@ -15,21 +17,30 @@ interface CartItemProps {
 }
 
 export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: CartItemProps) => {
-    const [quantityState, setQuantityState] = useState(quantity);
+    const { increase, decrease, remove } = useCart();
+    const [localQuantity, setLocalQuantity] = useState(quantity);
     const { HapticImpact } = useHapticFeedback();
+    const { webApp } = useTelegram();
 
     const handlePlusClick = () => {
-        setQuantityState(quantityState + 1);
+        increase(id);
+        setLocalQuantity(localQuantity + 1);
         HapticImpact("soft");
     };
 
     const handleMinusClick = () => {
-        if (quantityState > 1) {
-            setQuantityState(quantityState - 1);
+        if (quantity > 1) {
+            decrease(id);
+            setLocalQuantity(localQuantity - 1);
             HapticImpact("light");
         } else {
-            HapticImpact("rigid");
-            alert("Minimum quantity is 1");
+            webApp?.showConfirm("Are you sure you want to remove this item from cart?", (isConfirmed) => {
+                if (isConfirmed) {
+                    remove(id);
+                    setLocalQuantity(0);
+                    HapticImpact("rigid");
+                }
+            });
         }
     };
 
@@ -41,7 +52,10 @@ export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: Car
             <div className="flex flex-col flex-1">
                 <h2 className="font-medium">{name}</h2>
                 <p className="text-gray-400 text-sm">{subtitle}</p>
-                <p className="font-bold mt-auto">{price} zł</p>
+                <div className="flex mt-auto justify-between items-center">
+                    <span className="font-medium text-sm">{`${localQuantity} x ${price}zł`}</span>
+                    <span className="font-bold">{`${localQuantity * price} zł`}</span>
+                </div>
             </div>
             <div className="flex flex-col justify-between items-center">
                 <button
@@ -51,7 +65,7 @@ export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: Car
                     <Plus size={16} />
                 </button>
                 <div className="flex justify-center">
-                    <span>{quantityState}</span>
+                    <span>{localQuantity}</span>
                 </div>
                 <button
                     onClick={() => handleMinusClick()}

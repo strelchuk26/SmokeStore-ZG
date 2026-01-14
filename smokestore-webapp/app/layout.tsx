@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
 import { TelegramProvider } from "@/lib/TelegramProvider";
+import { CartProvider } from "@/lib/CartProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -27,17 +28,22 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
-                <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
-                <div>
-                    <TelegramProvider>
-                        <Header />
-                        <main className="flex-1">{children}</main>
-                        <Footer />
-                    </TelegramProvider>
-                </div>
-            </body>
-        </html>
+        <TelegramProvider>
+            <CartProvider>
+                <html lang="en" suppressHydrationWarning>
+                    <body
+                        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                        suppressHydrationWarning
+                    >
+                        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+                        <div>
+                            <Header />
+                            <main className="flex-1">{children}</main>
+                            <Footer />
+                        </div>
+                    </body>
+                </html>
+            </CartProvider>
+        </TelegramProvider>
     );
 }
