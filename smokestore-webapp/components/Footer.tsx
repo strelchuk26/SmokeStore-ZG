@@ -2,10 +2,12 @@
 
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { House, ShoppingCart, ClipboardList, UserRound } from "lucide-react";
+import { useCart } from "@/lib/CartProvider";
 import Link from "next/link";
 
 export const Footer = () => {
     const { HapticImpact } = useHapticFeedback();
+    const { items } = useCart();
 
     return (
         <>
@@ -13,19 +15,23 @@ export const Footer = () => {
                 className="flex p-4 w-full fixed bottom-0 justify-around items-center bg-white/10 border-gray-200
                 backdrop-blur-md border-opacity-20 z-50"
             >
-                <Link href="/" onClick={() => {
-                    HapticImpact("soft");
-                }}>
-                    <div className="flex flex-col items-center">
+                <Link href="/" onClick={() => HapticImpact("soft")}>
+                    <div className="flex flex-col items-center active:scale-95 duration-150">
                         <House />
                         <p className="text-[12px]">Home</p>
                     </div>
                 </Link>
-                <Link href="/cart" onClick={() => {
-                    HapticImpact("soft");
-                }}>
-                    <div className="flex flex-col items-center">
-                        <ShoppingCart />
+                <Link
+                    href="/cart"
+                    onClick={() => {
+                        HapticImpact("soft");
+                    }}
+                >
+                    <div className="flex flex-col justify-center items-center active:scale-95 duration-150">
+                        <div className="flex gap-0.5 items-center">
+                            <ShoppingCart />
+                            <span className="font-light text-sm">{items.length}</span>
+                        </div>
                         <p className="text-[12px]">My Cart</p>
                     </div>
                 </Link>

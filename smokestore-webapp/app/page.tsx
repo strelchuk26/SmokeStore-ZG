@@ -2,12 +2,32 @@
 
 import { ProductCard } from "@/components/ProductCard";
 import { products } from "./products";
+import { useTelegram } from "@/lib/TelegramProvider";
+import { useEffect } from "react";
+import { useCart } from "@/lib/CartProvider";
 // import { Button } from "@/components/ui/button";
 // import { TestTubeDiagonal } from "lucide-react";
 
 export default function Home() {
+    const { webApp } = useTelegram();
+    const { addToCart } = useCart();
+
+    useEffect(() => {
+        if (webApp) {
+            webApp.MainButton.hide();
+            webApp.SecondaryButton.hide();
+            webApp.expand();
+        }
+    }, [webApp]);
+
     return (
         <div className="wrapper flex flex-col mx-auto max-w-[430px]">
+            <div>
+                <h1 className="mx-4 text-2xl font-bold">
+                    Hello, {webApp?.initDataUnsafe?.user?.first_name || "User"}!
+                </h1>
+            </div>
+
             {/* <div className="m-4">
                 <h2 className="font-bold">Categories</h2>
                 <div className="flex mt-2 gap-4 scroll-smooth overflow-auto">
@@ -40,7 +60,13 @@ export default function Home() {
                         subtitle={product.subtitle}
                         image={product.image}
                         onAddToCart={() => {
-                            alert(`Add to cart: ${product.id}`);
+                            addToCart({
+                                id: product.id,
+                                name: product.name,
+                                price: product.price,
+                                subtitle: product.subtitle,
+                                image: product.image,
+                            });
                         }}
                     />
                 ))}
