@@ -23,7 +23,7 @@ export default function Home() {
     return (
         <div className="wrapper flex flex-col mx-auto max-w-[430px]">
             <div>
-                <h1 className="mx-4 text-2xl font-bold">
+                <h1 className="mx-4 text-2xl font-thin">
                     Hello, {webApp?.initDataUnsafe?.user?.first_name || "User"}!
                 </h1>
             </div>
