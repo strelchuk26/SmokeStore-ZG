@@ -1,12 +1,24 @@
 "use client";
 
 import { CartItem } from "@/components/CartItem";
+import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { useCart } from "@/lib/CartProvider";
-import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-    const { items } = useCart();
-    const totalSum = useMemo(() => items.reduce((acc, item) => acc + item.price * item.quantity, 0), [items]);
+    const { items, totalSum } = useCart();
+    const { HapticImpact } = useHapticFeedback();
+    const router = useRouter();
+
+    const handleCheckoutClick = () => {
+        HapticImpact("soft");
+        if (!items.length) {
+            alert("Cart is empty");
+            return;
+        }
+
+        router.push(`/checkout/${Date.now()}`);
+    };
 
     return (
         <div className="wrapper flex flex-col mx-auto max-w-[430px] pb-32">
@@ -25,13 +37,16 @@ export default function Home() {
                 />
             ))}
             <div className="fixed bottom-20 right-4 z-50">
-                <div className="flex items-center bg-white/10 backdrop-blur rounded-full pl-4 shadow-lg">
+                <div className="flex items-center bg-white/20 backdrop-blur rounded-full pl-4 shadow-lg">
                     <div>
                         <p className="text-10px mr-2">
                             Total: <span className="font-bold">{totalSum}</span> zł
                         </p>
                     </div>
-                    <button className="rounded-full bg-purple-600 px-4 py-2.5 font-semibold text-white shadow-xl active:scale-95 duration-150">
+                    <button
+                        onClick={handleCheckoutClick}
+                        className="rounded-full bg-purple-600 px-4 py-2.5 font-semibold text-white shadow-xl active:scale-95 duration-150"
+                    >
                         Checkout
                     </button>
                 </div>
