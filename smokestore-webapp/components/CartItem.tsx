@@ -53,14 +53,14 @@ export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: Car
                 <h2 className="font-medium">{name}</h2>
                 <p className="text-gray-400 text-sm">{subtitle}</p>
                 <div className="flex mt-auto justify-between items-center">
-                    <span className="font-medium text-sm">{`${localQuantity} x ${price}zł`}</span>
+                    <span className="font-medium text-sm">{`${localQuantity} x ${price} zł`}</span>
                     <span className="font-bold">{`${localQuantity * price} zł`}</span>
                 </div>
             </div>
             <div className="flex flex-col justify-between items-center">
                 <button
                     onClick={() => handlePlusClick()}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white active:scale-95"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white active:scale-95 duration-150"
                 >
                     <Plus size={16} />
                 </button>
@@ -69,7 +69,7 @@ export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: Car
                 </div>
                 <button
                     onClick={() => handleMinusClick()}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white active:scale-95"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-600 text-white active:scale-95 duration-150"
                 >
                     <Minus size={16} />
                 </button>

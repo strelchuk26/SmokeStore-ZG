@@ -38,7 +38,7 @@ export default function RootLayout({
                         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
                         <div>
                             <Header />
-                            <main className="flex-1">{children}</main>
+                            <main className="flex-1 min-h-screen">{children}</main>
                             <Footer />
                         </div>
                     </body>
