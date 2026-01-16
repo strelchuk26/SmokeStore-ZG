@@ -1,49 +1,24 @@
 "use client";
 
-import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { House, ShoppingCart, ClipboardList, UserRound } from "lucide-react";
-import { useCart } from "@/lib/CartProvider";
-import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FooterItem } from "./FooterItem";
 
-export const Footer = () => {
-    const { HapticImpact } = useHapticFeedback();
-    const { items } = useCart();
+export const Footer = () => {    
+    const pathname = usePathname();
+    const isActive = (path: string) => pathname === path;
 
     return (
-        <>
+        <footer>
             <div
                 className="flex p-4 w-full fixed bottom-0 justify-around items-center bg-white/10 border-gray-200
                 backdrop-blur-md border-opacity-20 z-50"
             >
-                <Link href="/" onClick={() => HapticImpact("soft")}>
-                    <div className="flex flex-col items-center active:scale-95 duration-150">
-                        <House />
-                        <p className="text-[12px]">Home</p>
-                    </div>
-                </Link>
-                <Link
-                    href="/cart"
-                    onClick={() => {
-                        HapticImpact("soft");
-                    }}
-                >
-                    <div className="flex flex-col justify-center items-center active:scale-95 duration-150">
-                        <div className="flex gap-0.5 items-center">
-                            <ShoppingCart />
-                            <span className="font-light text-sm">{items.length}</span>
-                        </div>
-                        <p className="text-[12px]">My Cart</p>
-                    </div>
-                </Link>
-                <div className="flex flex-col items-center">
-                    <ClipboardList />
-                    <p className="text-[12px]">Orders</p>
-                </div>
-                <div className="flex flex-col items-center">
-                    <UserRound />
-                    <p className="text-[12px]">Profile</p>
-                </div>
+                <FooterItem href="/" icon={House} label="Home" active={isActive("/")} />
+                <FooterItem href="/cart" icon={ShoppingCart} label="Cart" active={isActive("/cart")} />
+                <FooterItem href="/orders" icon={ClipboardList} label="Orders" active={isActive("/orders")} />
+                <FooterItem href="/profile" icon={UserRound} label="Profile" active={isActive("/profile")} />
             </div>
-        </>
+        </footer>
     );
 };
