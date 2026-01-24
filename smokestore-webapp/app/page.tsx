@@ -5,6 +5,7 @@ import { products } from "./products";
 import { useTelegram } from "@/lib/TelegramProvider";
 import { useEffect } from "react";
 import { useCart } from "@/lib/CartProvider";
+import { toast } from "sonner";
 // import { Button } from "@/components/ui/button";
 // import { TestTubeDiagonal } from "lucide-react";
 
@@ -67,6 +68,7 @@ export default function Home() {
                                 subtitle: product.subtitle,
                                 image: product.image,
                             });
+                            toast.success(`${product.name} added to cart`);
                         }}
                     />
                 ))}

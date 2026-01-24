@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cal_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
 import { TelegramProvider } from "@/lib/TelegramProvider";
 import { CartProvider } from "@/lib/CartProvider";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
                     >
                         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
                         <div>
+                            <Toaster position="top-center" duration={2500} toastOptions={{ className: "rounded-xl", }} richColors />
                             <Header />
                             <main className="flex-1 min-h-screen">{children}</main>
                             <Footer />
