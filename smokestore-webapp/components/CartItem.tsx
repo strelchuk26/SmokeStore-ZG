@@ -6,8 +6,9 @@ import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { useCart } from "@/lib/CartProvider";
 import { useState } from "react";
 import { useTelegram } from "@/lib/TelegramProvider";
+import { toast } from "sonner";
 
-interface CartItemProps {
+export interface CartItemProps {
     id: string;
     name: string;
     price: number;
@@ -39,6 +40,7 @@ export const CartItem = ({ id, name, price, subtitle, image, quantity = 1 }: Car
                     remove(id);
                     setLocalQuantity(0);
                     HapticImpact("rigid");
+                    toast.info(`${name} removed from cart`);
                 }
             });
         }

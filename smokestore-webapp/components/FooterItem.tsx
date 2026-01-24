@@ -14,7 +14,7 @@ export const FooterItem = ({ href, icon: Icon, label, active }: FooterItemProps)
     const { HapticImpact } = useHapticFeedback();
     const { items } = useCart();
 
-    const colorClass = active ? "text-gray-500" : "text-black";
+    const colorClass = active ? "text-black" : "text-gray-600";
 
     return href == "/cart" ? (
         <Link href={href} onClick={() => HapticImpact(active ? "rigid" : "soft")}>
