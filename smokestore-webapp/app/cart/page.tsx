@@ -3,10 +3,12 @@
 import { CartItem } from "@/components/CartItem";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { useCart } from "@/lib/CartProvider";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { SwipeToDeleteItem } from "./SwipeToDeleteItem";
 
 export default function Home() {
-    const { items, totalSum } = useCart();
+    const { items, totalSum, remove } = useCart();
     const { HapticImpact } = useHapticFeedback();
     const router = useRouter();
 
@@ -22,30 +24,34 @@ export default function Home() {
 
     return (
         <div className="wrapper flex flex-col mx-auto max-w-[430px] pb-32">
-            {items.length == 0 ? (
-                <div className="w-100% h-[60vh] flex justify-center items-center">
-                    <p className="text-center text-2xl font-thin">Cart is empty :(</p>
+            {items.length === 0 ? (
+                <div className="h-[60vh] flex justify-center items-center">
+                    <p className="text-2xl font-thin">Cart is empty :(</p>
                 </div>
             ) : (
-                items.map((item) => (
-                    <CartItem
-                        key={item.id}
-                        id={item.id}
-                        name={item.name}
-                        price={item.price}
-                        subtitle={item.subtitle}
-                        image={item.image}
-                        quantity={item.quantity}
-                    />
-                ))
+                <AnimatePresence>
+                    {items.map((item) => (
+                        <SwipeToDeleteItem
+                            key={item.id}
+                            id={item.id}
+                            onDelete={() => remove(item.id)}
+                        >
+                            <CartItem {...item} />
+                        </SwipeToDeleteItem>
+                    ))}
+                </AnimatePresence>
             )}
-            <div className="fixed bottom-20 right-4 z-50">
+            <motion.div
+                layout
+                transition={{ layout: { duration: 0.25, ease: "easeOut" } }}
+                className="fixed bottom-20 right-4 z-50"
+            >
                 <div className="flex items-center bg-white/20 backdrop-blur rounded-full pl-4 shadow-lg">
-                    <div>
-                        <p className="text-10px mr-2">
+                    <motion.div layout transition={{ layout: { duration: 0.25, ease: "easeOut" } }}>
+                        <motion.p layout className="text-10px mr-2 my-2.5">
                             Total: <span className="font-bold">{totalSum}</span> zł
-                        </p>
-                    </div>
+                        </motion.p>
+                    </motion.div>
                     {items.length == 0 ? (
                         <button
                             onClick={handleCheckoutClick}
@@ -62,7 +68,7 @@ export default function Home() {
                         </button>
                     )}
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }
