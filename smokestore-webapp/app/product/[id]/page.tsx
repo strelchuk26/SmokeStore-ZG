@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { BackButton } from "@/components/BackButton";
 import { useParams } from "next/navigation";
 import { products } from "@/app/products";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
@@ -15,7 +14,7 @@ export default function ProductPage() {
     const { addToCart } = useCart();
 
     return (
-        <div className="flex flex-col mx-4">
+        <div className="flex flex-col px-4 py-4 bg-white">
             <Image className="self-center" width={200} height={200} src="/vozol.png" alt={`${id}`} />
             <h1 className="text-2xl font-bold mt-4">{product?.name}</h1>
             <p className="text-lg text-gray-600 mt-2">{product?.subtitle}</p>
